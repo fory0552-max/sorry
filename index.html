@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>For Muskan</title>
+    
+    <!-- jQuery for Ripples.js -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- Three.js for elegant starfield -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    <!-- GSAP for cinematic transitions -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://unpkg.com/split-type"></script>
+    
+    <!-- WebGL Water Ripples -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery.ripples@0.6.3/jquery.ripples.min.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Premium Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <audio id="bg-music" loop crossorigin="anonymous">
+        <source src="song.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Phase 1: Foggy Mirror Wipe Overlay -->
+    <canvas id="fog-canvas"></canvas>
+    <div id="wipe-instruction">Wipe the screen to clear the fog...</div>
+
+    <!-- Cinematic Letterbox (Black Bars) -->
+    <div class="cinematic-bar top" id="bar-top"></div>
+    <div class="cinematic-bar bottom" id="bar-bottom"></div>
+
+    <!-- Movie Credits Sequence Container -->
+    <div id="credits-container">
+        <p class="credit-line">I am truly sorry.</p>
+        <p class="credit-line">I let my own frustrations blind me...</p>
+        <p class="credit-line">And I unfairly took it out on the one person who brings peace to my life.</p>
+        <p class="credit-line">You are precious to me.</p>
+        <p class="credit-line">I promise to be better, for you.</p>
+    </div>
+
+    <!-- Phase 2: Main Experience -->
+    <div id="webgl-container"></div>
+    <div class="film-grain"></div>
+
+    <div id="main" class="hidden">
+        <div class="content-wrapper">
+            
+            <!-- Liquid Ripple Photo Frame with Cinematic Light Leaks -->
+            <div class="photo-frame" id="ripple-photo" style="background-image: url('photo.jpg');">
+                <div class="light-leak"></div>
+            </div>
+            
+            <div class="message-container">
+                <!-- Interactive Apology Box -->
+                <div class="interactive-box" id="apology-box">
+                    <p id="box-text">Maaf kr doo naa main to thumera BF wala friend huu naa 🥺</p>
+                    <div class="buttons-container">
+                        <button id="btn-yes" class="btn">Thik hai maaf kya</button>
+                        <button id="btn-no" class="btn">Nahi kru gee</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

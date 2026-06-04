@@ -1,0 +1,259 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    width: 100%;
+    height: 100%;
+    background-color: #050505; 
+    font-family: 'Inter', sans-serif;
+    color: #e0e0e0;
+    overflow: hidden;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Phase 1: Fog Canvas Overlay */
+#fog-canvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 1000;
+    cursor: pointer;
+    touch-action: none; 
+}
+
+#wipe-instruction {
+    position: fixed;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1001;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: rgba(255,255,255,0.7);
+    letter-spacing: 2px;
+    pointer-events: none;
+    text-shadow: 0 0 10px rgba(0,0,0,0.5);
+    animation: pulseText 2s infinite alternate;
+    text-align: center;
+    width: 90%;
+}
+
+@keyframes pulseText {
+    from { opacity: 0.3; }
+    to { opacity: 0.8; }
+}
+
+/* Cinematic Letterbox (Black Bars) */
+.cinematic-bar {
+    position: fixed;
+    left: 0;
+    width: 100%;
+    height: 12vh;
+    background-color: #000;
+    z-index: 500;
+    pointer-events: none;
+    box-shadow: 0 0 20px rgba(0,0,0,0.9);
+}
+
+.cinematic-bar.top {
+    top: 0;
+    transform: translateY(-100%); /* Hidden initially */
+}
+
+.cinematic-bar.bottom {
+    bottom: 0;
+    transform: translateY(100%); /* Hidden initially */
+}
+
+/* Movie Credits Container */
+#credits-container {
+    position: fixed;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 800px;
+    text-align: center;
+    z-index: 100;
+    pointer-events: none;
+}
+
+.credit-line {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.9);
+    letter-spacing: 1px;
+    text-shadow: 0 4px 10px rgba(0,0,0,0.8);
+    opacity: 0;
+    width: 100%;
+}
+
+/* Film Grain */
+.film-grain {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: url('https://grainy-gradients.vercel.app/noise.svg');
+    opacity: 0.15;
+    pointer-events: none;
+    z-index: 2;
+    mix-blend-mode: overlay;
+}
+
+#webgl-container {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* --- Main Content --- */
+#main {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 900px;
+    z-index: 20;
+}
+
+/* Liquid Ripple Photo Frame */
+.photo-frame {
+    position: relative; 
+    width: 220px;
+    height: 300px;
+    margin-bottom: 35px;
+    background-color: #111;
+    background-size: cover;
+    background-position: center;
+    border: 8px solid rgba(255, 255, 255, 0.95);
+    border-bottom-width: 35px; 
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8);
+    border-radius: 2px;
+    overflow: hidden;
+    cursor: pointer;
+    /* Ken Burns slow zoom */
+    transform: scale(1.05); 
+}
+
+/* Cinematic Light Leak Effect inside Photo */
+.light-leak {
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: linear-gradient(
+        45deg, 
+        transparent 30%, 
+        rgba(255, 180, 100, 0.3) 45%, 
+        rgba(255, 255, 255, 0.4) 50%, 
+        rgba(255, 150, 200, 0.2) 55%, 
+        transparent 70%
+    );
+    pointer-events: none;
+    z-index: 10;
+    mix-blend-mode: screen;
+    transform: rotate(30deg) translate(-100%, -100%);
+}
+
+.message-container {
+    width: 90%;
+    text-align: center;
+}
+
+/* --- Interactive Apology Box --- */
+.interactive-box {
+    margin-top: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 25px;
+    border-radius: 12px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    opacity: 0; 
+    transform: translateY(20px);
+}
+
+.interactive-box p {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.1rem;
+    color: #fff;
+    margin-bottom: 25px;
+    text-align: center;
+    font-weight: 400;
+}
+
+.buttons-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    height: 40px;
+    align-items: center;
+}
+
+.btn {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 20px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: transform 0.2s, background 0.2s;
+    white-space: nowrap;
+}
+
+#btn-yes {
+    background: #fff;
+    color: #050505;
+}
+#btn-yes:active {
+    transform: scale(0.95);
+}
+
+#btn-no {
+    background: transparent;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.4);
+    z-index: 50; 
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .photo-frame {
+        width: 200px; height: 280px;
+        border-width: 6px;
+        border-bottom-width: 25px;
+    }
+    .credit-line { font-size: 1.2rem; }
+}
+
+@media (min-width: 768px) {
+    .content-wrapper { flex-direction: row; gap: 70px; }
+    .photo-frame { width: 320px; height: 420px; margin-bottom: 0; border-width: 12px; border-bottom-width: 50px;}
+    .message-container { width: 50%; text-align: left; }
+    .credit-line { font-size: 2.2rem; }
+    .interactive-box { text-align: left; }
+    .buttons-container { justify-content: flex-start; }
+}
